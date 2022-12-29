@@ -1,5 +1,10 @@
 #!/usr/bin/env groovy
 
-def call(String Name) {
-    println(name)
+void call(Map map = [ : ])}
+
+String NAME = null;
+
+NAME = map.NAME.trim()
+println(NAME)
+
 }
