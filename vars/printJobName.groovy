@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-void call(Map map = [ : ])}
+void call(Map map = [ : ]){
 
 String NAME = null;
 
