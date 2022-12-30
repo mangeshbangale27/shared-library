@@ -26,7 +26,7 @@ if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() &&
     error("Some of values are missing : \n ENVIRONMET : ${map.ENVIRONMET}, STATUS : ${map.STAUS}, SOURCE_BRANCH : ${map.SOURCE_BRANCH}, IMAGE_TAG : ${map.IMAGE_TAG}, CRED_USERNAME : ${map.CRED_USERNAME}, CRED_PASSWORD: ${map.CRED_PASSWORD}")
 }
 
-withCredentails([
+withCredentials([
     string(credentialsId: "${CRED_USERNAME}", variable : 'USERNAME'),
     string(credentialsId: "${CRED_PASSWORD}", variable : 'PASSWORD')
 ]) {
