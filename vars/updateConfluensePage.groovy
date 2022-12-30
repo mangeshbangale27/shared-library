@@ -57,7 +57,7 @@ withCredentails([
             SOURCE_BRANCH = matcher[0][2]
         }
         
-        jsonData.body.storage.value = jsonData.body.storage.value.replaceFirst("<td colspan=\"1\"><strong>${ENVIRONMET}</strong><td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td>", "<td colspan=\"1\"><strong>${ENVIRONMET}<\/strong><td><td colspan=\"1\">${STATUS}</td><td colspan=\"1\">${SOURCE_BRANCH}</td><td colspan=\"1\">${IMAGE_TAG}</td><td colspan=\"1\">${CONFIG_BRANCH}</td><td colspan=\"1\">${DEPLOY_TIME}</td>" )
+        jsonData.body.storage.value = jsonData.body.storage.value.replaceFirst("<td colspan=\"1\"><strong>${ENVIRONMET}</strong><td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td>", "<td colspan=\"1\"><strong>${ENVIRONMET}</strong><td><td colspan=\"1\">${STATUS}</td><td colspan=\"1\">${SOURCE_BRANCH}</td><td colspan=\"1\">${IMAGE_TAG}</td><td colspan=\"1\">${CONFIG_BRANCH}</td><td colspan=\"1\">${DEPLOY_TIME}</td>" )
         jsonData.version.number += 1
 
         // save new confluense page
