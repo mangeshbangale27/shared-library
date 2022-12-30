@@ -1,7 +1,7 @@
 import groovy.json.JsonSlurper
 import groovy.json.JsonBuilder
 import java.util.*
-import java.textDateFormat
+import java.text.SimpleDateFormat
 
 
 void call (Map map = [:]){
@@ -43,7 +43,7 @@ withCredentails([
         def responseCode = siteConnection.getResponseCode()
         println(responseCode)
 
-        def date = new date()
+        def date = new Date()
         def DEPLOY_TIME = date.format("dd/MM/yyyy HH:mm")
         def jsonData = new JsonSlurper.parseText(siteConnection.getInputStream().getText())
 
