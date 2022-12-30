@@ -27,8 +27,8 @@ if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() &&
 }
 
 withCredentials([
-    string(credentialsId: "${CRED_USERNAME}", variable : 'USERNAME'),
-    string(credentialsId: "${CRED_PASSWORD}", variable : 'PASSWORD')
+    string(credentialsId: "confluenceUsername", variable : 'USERNAME'),
+    string(credentialsId: "confluencePassword", variable : 'PASSWORD')
 ]) {
     int statusUpdate = 100
     int i = 0
