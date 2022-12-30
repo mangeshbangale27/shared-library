@@ -45,7 +45,7 @@ withCredentails([
 
         def date = new Date()
         def DEPLOY_TIME = date.format("dd/MM/yyyy HH:mm")
-        def jsonData = new JsonSlurper.parseText(siteConnection.getInputStream().getText())
+        def jsonData = new JsonSlurper().parseText(siteConnection.getInputStream().getText())
 
         def matcher = jsonData.body.storage.value =~ /<td colspan="1"><strong>${ENVIRONMET}<\/strong><\/td><td colspan="1">(.*?)<\/td><td colspan="1">(.*?)<\/td><td colspan="1">(.*?)<\/td><td colspan="1">(.*?)<\/td><td colspan="1">(.*?)<\/td>/
         
