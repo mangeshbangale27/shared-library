@@ -28,7 +28,7 @@ if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() &&
 
 withCredentails([
     string(credentialsId: "${CRED_USERNAME}", variable : 'USERNAME'),
-    string(credentialsId: "${CRED_UPASSWORD}", variable : 'PASSWORD')
+    string(credentialsId: "${CRED_PASSWORD}", variable : 'PASSWORD')
 ]) {
     int statusUpdate = 100
     int i = 0
