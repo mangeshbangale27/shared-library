@@ -38,7 +38,7 @@ withCredentails([
     int i = 0
     while (statusUpdate != 200 && i <= 5) {
         def siteConnection = new URL ("https://mangeshbangale.atlassian.net/wiki/rest/api/content/65661?expand=body.storage,version").openConnection()
-        def credentials = USERNAME + ":" PASSWORD
+        def credentials = USERNAME + ":" + PASSWORD
         siteConnection.setRequestProperty("Authorization", "Basic " + new String(Base64.getEncoder().encode(credentials.getBytes())))
         def responseCode = siteConnection.getResponseCode()
         println(responseCode)
