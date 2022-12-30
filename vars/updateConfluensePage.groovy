@@ -4,7 +4,7 @@ import java.util.*
 import java.text.SimpleDateFormat
 
 
-void call (Map map = [:]){
+void call (Map map = [ : ]){
     String ENVIRONMET = null;
     String STATUS = null;
     String SOURCE_BRANCH = null;
@@ -13,8 +13,6 @@ void call (Map map = [:]){
     String CRED_USERNAME = null;
     String CRED_PASSWORD = null;
    
-}
-
 
 if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() && map.IMAGE_TAG?.trim() && map.CRED_USERNAME?.trim() && map.CRED_PASSWORD?.trim()){
     ENVIRONMET = "${map.ENVIRONMET}".trim()
@@ -79,4 +77,6 @@ withCredentails([
         }
 
     }
+}
+
 }
