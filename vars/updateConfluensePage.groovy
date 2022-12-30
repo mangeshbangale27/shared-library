@@ -37,7 +37,7 @@ withCredentials([
         def credentials = USERNAME + ":" + PASSWORD
         println(USERNAME)
         println(PASSWORD)
-        siteConnection.setRequestProperty("Authorization", "Basic " + /*new String(Base64.getEncoder().encode(credentials.getBytes()*/credentials )))
+        siteConnection.setRequestProperty("Authorization", "Basic " + credentials ) //new String(Base64.getEncoder().encode(credentials.getBytes()))
         def responseCode = siteConnection.getResponseCode()
         println(responseCode)
 
