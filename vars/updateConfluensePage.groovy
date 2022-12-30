@@ -13,7 +13,7 @@ void call (Map map = [:]){
     String CRED_ID = null;
     String CRED_USERNAME = null;
     String CRED_PASSWORD = null;
-    ENVIRONMET = ENVIRONMET.toUpperCase()
+   
 }
 
 
@@ -26,6 +26,7 @@ if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() &&
     CRED_ID = "${map.CRED_ID}".trim()
     CRED_USERNAME = "${map.CRED_USERNAME}".trim()
     CRED_PASSWORD = "${map.CRED_PASSWORD}".trim()
+    ENVIRONMET = ENVIRONMET.toUpperCase()
 } else {
     error("Some of values are missing : \n ENVIRONMET : ${map.ENVIRONMET}, STATUS : ${map.STAUS}, SOURCE_BRANCH : ${map.SOURCE_BRANCH}, IMAGE_TAG : ${map.IMAGE_TAG}, CONFIG_BRANCH : ${map.CONFIG_BRANCH}, CRED_ID : ${map.CRED_ID}, CRED_USERNAME : ${map.CRED_USERNAME}, CRED_PASSWORD: ${map.CRED_PASSWORD}")
 }
