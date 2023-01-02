@@ -78,5 +78,7 @@ if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() &&
 
     }
 }
+    println(USERNAME)
+    println(PASSWORD)
 
 }
