@@ -7,6 +7,7 @@ String PASS = null;
  withCredentials([usernamePassword(credentialsId: 'fullName', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
   NAME = USERNAME;
   PASS = PASSWORD;
+  println("Hello...")
 }
 println(NAME)
 println(PASS)
