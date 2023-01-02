@@ -35,6 +35,7 @@ if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() &&
         def credentials = USERNAME + ":" + PASSWORD
         println(USERNAME)
         println(PASSWORD)
+        println(SOURCE_BRANCH)
         siteConnection.setRequestProperty("Authorization", "Basic " + new String(Base64.getEncoder().encode(credentials.getBytes())) ) 
         def responseCode = siteConnection.getResponseCode()
         println(responseCode)
@@ -78,7 +79,6 @@ if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() &&
 
     }
 }
-    println(USERNAME)
-    println(PASSWORD)
+
 
 }
