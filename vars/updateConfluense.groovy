@@ -36,6 +36,7 @@ if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() &&
         println(USERNAME)
         println(PASSWORD)
         println(SOURCE_BRANCH)
+        println(ENVIRONMET)
         siteConnection.setRequestProperty("Authorization", "Basic " + new String(Base64.getEncoder().encode(credentials.getBytes())) ) 
         def responseCode = siteConnection.getResponseCode()
         println(responseCode)
