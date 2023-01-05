@@ -19,11 +19,11 @@ if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() &&
     STATUS = "${map.STATUS}".trim()
     SOURCE_BRANCH = "${map.SOURCE_BRANCH}".trim()
     IMAGE_TAG = "${map.IMAGE_TAG}".trim()
-    CRED_USERNAME = "${map.CRED_USERNAME}".trim()
-    CRED_PASSWORD = "${map.CRED_PASSWORD}".trim()
+   // CRED_USERNAME = "${map.CRED_USERNAME}".trim()
+   // CRED_PASSWORD = "${map.CRED_PASSWORD}".trim()
     ENVIRONMET = ENVIRONMET.toUpperCase()
 } else {
-    error("Some of values are missing : \n ENVIRONMET : ${map.ENVIRONMET}, STATUS : ${map.STAUS}, SOURCE_BRANCH : ${map.SOURCE_BRANCH}, IMAGE_TAG : ${map.IMAGE_TAG}, CRED_USERNAME : ${map.CRED_USERNAME}, CRED_PASSWORD: ${map.CRED_PASSWORD}")
+    error("Some of values are missing : \n ENVIRONMET : ${map.ENVIRONMET}, STATUS : ${map.STAUS}, SOURCE_BRANCH : ${map.SOURCE_BRANCH}, IMAGE_TAG : ${map.IMAGE_TAG}")
 }
 
 withCredentials([
