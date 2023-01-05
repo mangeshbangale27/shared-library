@@ -69,6 +69,7 @@ withCredentials([
         statusUpdate = siteConnection.getResponseCode();
         println("page updated successfully...")
         println(DEPLOY_TIME)
+        println(env.BRANCH_NAME)
 
         if (statusUpdate != 200) {
             sleep(1000)  // 1 sec delay - may be another process try to update confluense page
