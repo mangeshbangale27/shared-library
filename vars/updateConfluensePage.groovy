@@ -14,7 +14,7 @@ void call (Map map = [ : ]){
     String CRED_PASSWORD = null;
    
 
-if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() && map.IMAGE_TAG?.trim() && map.CRED_USERNAME?.trim() && map.CRED_PASSWORD?.trim()){
+if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() && map.IMAGE_TAG?.trim()){
     ENVIRONMET = "${map.ENVIRONMET}".trim()
     STATUS = "${map.STATUS}".trim()
     SOURCE_BRANCH = "${map.SOURCE_BRANCH}".trim()
