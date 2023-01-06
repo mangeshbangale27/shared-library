@@ -70,8 +70,6 @@ withCredentials([
         siteConnection.getOutputStream().write(new JsonBuilder(jsonData).toPrettyString().getBytes("UTF-8"))
         statusUpdate = siteConnection.getResponseCode();
         println("page updated successfully...")
-        println(DEPLOY_TIME)
-        println(SOURCE_BRANCH)
 
         if (statusUpdate != 200) {
             sleep(1000)  // 1 sec delay - may be another process try to update confluense page
