@@ -14,22 +14,20 @@ void call (Map map = [ : ]){
     String CRED_PASSWORD = null;
    
 
-if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() && map.IMAGE_TAG?.trim()){
+if (map.ENVIRONMET?.trim() && map.STATUS?.trim() && map.SOURCE_BRANCH?.trim() && map.IMAGE_TAG?.trim() && map.CRED_USERNAME?.trim() && map.CRED_PASSWORD?.trim()){
     ENVIRONMET = "${map.ENVIRONMET}".trim()
     STATUS = "${map.STATUS}".trim()
     SOURCE_BRANCH = "${map.SOURCE_BRANCH}".trim()
     IMAGE_TAG = "${map.IMAGE_TAG}".trim()
-   // CRED_USERNAME = "${map.CRED_USERNAME}".trim()
-   // CRED_PASSWORD = "${map.CRED_PASSWORD}".trim()
+    CRED_USERNAME = "${map.CRED_USERNAME}".trim()
+    CRED_PASSWORD = "${map.CRED_PASSWORD}".trim()
     ENVIRONMET = ENVIRONMET.toUpperCase()
 } else {
-    error("Some of values are missing : \n ENVIRONMET : ${map.ENVIRONMET}, STATUS : ${map.STAUS}, SOURCE_BRANCH : ${map.SOURCE_BRANCH}, IMAGE_TAG : ${map.IMAGE_TAG}")
+    error("Some of values are missing : \n ENVIRONMET : ${map.ENVIRONMET}, STATUS : ${map.STAUS}, SOURCE_BRANCH : ${map.SOURCE_BRANCH}, IMAGE_TAG : ${map.IMAGE_TAG}, CRED_USERNAME : ${map.CRED_USERNAME}, CRED_PASSWORD: ${map.CRED_PASSWORD}")
 }
 
-withCredentials([
-    string(credentialsId: "confluenceUsername", variable : 'USERNAME'),
-    string(credentialsId: "confluencePassword", variable : 'PASSWORD')
-]) {
+
+  withCredentials([usernamePassword(credentialsId: 'confluenseCred', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
     int statusUpdate = 100
     int i = 0
     while (statusUpdate != 200 && i <= 5) {
@@ -37,11 +35,11 @@ withCredentials([
         def credentials = USERNAME + ":" + PASSWORD
         println(USERNAME)
         println(PASSWORD)
+        println(SOURCE_BRANCH)
+        println(ENVIRONMET)
         siteConnection.setRequestProperty("Authorization", "Basic " + new String(Base64.getEncoder().encode(credentials.getBytes())) ) 
         def responseCode = siteConnection.getResponseCode()
         println(responseCode)
-        println(ENVIRONMET)
-        println(STATUS)
 
         def date = new Date()
         def DEPLOY_TIME = date.format("dd/MM/yyyy HH:mm")
@@ -70,8 +68,6 @@ withCredentials([
         siteConnection.getOutputStream().write(new JsonBuilder(jsonData).toPrettyString().getBytes("UTF-8"))
         statusUpdate = siteConnection.getResponseCode();
         println("page updated successfully...")
-        println(DEPLOY_TIME)
-        println(SOURCE_BRANCH)
 
         if (statusUpdate != 200) {
             sleep(1000)  // 1 sec delay - may be another process try to update confluense page
@@ -84,5 +80,6 @@ withCredentials([
 
     }
 }
+
 
 }
