@@ -40,6 +40,8 @@ withCredentials([
         siteConnection.setRequestProperty("Authorization", "Basic " + credentials ) //new String(Base64.getEncoder().encode(credentials.getBytes()))
         def responseCode = siteConnection.getResponseCode()
         println(responseCode)
+        println(ENVIRONMET)
+        println(STATUS)
 
         def date = new Date()
         def DEPLOY_TIME = date.format("dd/MM/yyyy HH:mm")
