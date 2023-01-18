@@ -1,3 +1,4 @@
+@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.7' )
 import groovyx.net.http.RESTClient
 
 // Set up the REST client
