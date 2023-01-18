@@ -64,7 +64,7 @@ withCredentials([
 // def newRow = "<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>${STATUS}</p></td><td><p>${SOURCE_BRANCH}</p></td><td><p>${IMAGE_TAG}</p></td><td><p>${DEPLOY_TIME}</p></td>"
 
 // jsonData.body.storage.value << newRow
-        println(jsonData.body.storage.value[0])
+        println(jsonData.body.storage.value[0][1])
        
         jsonData.body.storage.value = jsonData.body.storage.value.replaceFirst("<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td>","<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>${STATUS}</p></td><td><p>${SOURCE_BRANCH}</p></td><td><p>${IMAGE_TAG}</p></td><td><p>${DEPLOY_TIME}</p></td>")
         //jsonData.body.storage.value = jsonData.body.storage.value.insert("<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>${STATUS}</p></td><td><p>${SOURCE_BRANCH}</p></td><td><p>${IMAGE_TAG}</p></td><td><p>${DEPLOY_TIME}</p></td>")
