@@ -61,12 +61,12 @@ withCredentials([
             SOURCE_BRANCH = matcher[0][2]
         }
     
-def newRow = "<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>${STATUS}</p></td><td><p>${SOURCE_BRANCH}</p></td><td><p>${IMAGE_TAG}</p></td><td><p>${DEPLOY_TIME}</p></td>"
+// def newRow = "<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>${STATUS}</p></td><td><p>${SOURCE_BRANCH}</p></td><td><p>${IMAGE_TAG}</p></td><td><p>${DEPLOY_TIME}</p></td>"
 
-jsonData.body.storage.value << newRow
+// jsonData.body.storage.value << newRow
+        println(jsonData)
 
-
-        //jsonData.body.storage.value = jsonData.body.storage.value.replaceFirst("<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td>","<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>${STATUS}</p></td><td><p>${SOURCE_BRANCH}</p></td><td><p>${IMAGE_TAG}</p></td><td><p>${DEPLOY_TIME}</p></td>")
+        jsonData.body.storage.value = jsonData.body.storage.value.replaceFirst("<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td>","<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>${STATUS}</p></td><td><p>${SOURCE_BRANCH}</p></td><td><p>${IMAGE_TAG}</p></td><td><p>${DEPLOY_TIME}</p></td>")
         //jsonData.body.storage.value = jsonData.body.storage.value.insert("<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>${STATUS}</p></td><td><p>${SOURCE_BRANCH}</p></td><td><p>${IMAGE_TAG}</p></td><td><p>${DEPLOY_TIME}</p></td>")
         
     //("<td colspan=\"1\"><strong>${ENVIRONMET}</strong><td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td>", "<td colspan=\"1\"><strong>${ENVIRONMET}</strong><td><td colspan=\"1\">${STATUS}</td><td colspan=\"1\">${SOURCE_BRANCH}</td><td colspan=\"1\">${IMAGE_TAG}</td><td colspan=\"1\">${DEPLOY_TIME}</td>" )
