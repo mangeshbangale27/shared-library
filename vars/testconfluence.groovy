@@ -2,7 +2,7 @@
 import groovyx.net.http.RESTClient
 
 // Set up the REST client
-def confluenceUrl = "mangeshbangale.atlassian.net"
+def confluenceUrl = "https://mangeshbangale.atlassian.net"
 def client = new RESTClient(confluenceUrl)
 def username = "mangeshbangale27@gmail.com"
 def password = "excKBCr7rFgrerpnFIsC6888"
