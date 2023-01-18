@@ -1,5 +1,5 @@
 import groovy.json.JsonSlurper
-import groovy.xml.XmlSlurper
+import groovy.xml.*
 import groovy.json.JsonBuilder
 import java.util.*
 import java.text.SimpleDateFormat
