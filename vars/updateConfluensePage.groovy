@@ -61,9 +61,95 @@ withCredentials([
             SOURCE_BRANCH = matcher[0][2]
         }
     
-def newRow = "<tr><td><p><strong>PROD</strong></p></td><td><p>UP</p></td><td><p>MANGESH</p></td><td><p>BANGALE</p></td><td><p>DATE</p></td></tr>"
-def referenceRow = "<td><p><strong>PROD</strong></p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td>"
-jsonData.body.storage.value = jsonData.body.storage.value.replaceFirst(referenceRow, "$0"+newRow)
+def newRow = [
+    "table": [
+        "type": "table",
+        "content": [
+            [
+                "type": "tableRow",
+                "content": [
+                    [
+                        "type": "tableCell",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "text": "${ENVIRONMENT}",
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "strong"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    ],
+                    [
+                        "type": "tableCell",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "text": "${STATUS}",
+                                        "type": "text"
+                                    }
+                                ]
+                            }
+                        ]
+                    ],
+                    [
+                        "type": "tableCell",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "text": "${SOURCE_BRANCH}",
+                                        "type": "text"
+                                    }
+                                ]
+                            }
+                        ]
+                    ],
+                    [
+                        "type": "tableCell",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "text": "${IMAGE_TAG}",
+                                        "type": "text"
+                                    }
+                                ]
+                            }
+                        ]
+                    ],
+                    [
+                        "type": "tableCell",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "text": "${DEPLOY_TIME}",
+                                        "type": "text"
+                                    }
+                                ]
+                            }
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ]
+]
+
+jsonData.body.storage.value << newRow
 
 
         //jsonData.body.storage.value = jsonData.body.storage.value.replaceFirst("<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td>","<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>${STATUS}</p></td><td><p>${SOURCE_BRANCH}</p></td><td><p>${IMAGE_TAG}</p></td><td><p>${DEPLOY_TIME}</p></td>")
