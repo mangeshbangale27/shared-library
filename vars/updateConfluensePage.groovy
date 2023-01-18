@@ -62,10 +62,32 @@ withCredentials([
         }
         def table = new XmlSlurper().parseText(jsonData.body.storage.value)
         table.appendNode {
-    tr {
-   td("new-cell-1")
-   td("new-cell-2")
-   td("new-cell-3")
+ tr {
+   td {
+     p {
+       "new-cell-1"
+     }
+   }
+   td {
+    p {
+       "new-cell-2"
+     }
+   }
+   td {
+    p {
+       "new-cell-3"
+     }
+   }
+   td {
+    p {
+       "new-cell-3"
+     }
+   }
+   td {
+    p {
+       "new-cell-3"
+     }
+   }
  }
 }
      jsonData.body.storage.value = table.toString()
