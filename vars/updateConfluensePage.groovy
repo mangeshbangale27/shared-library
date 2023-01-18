@@ -47,7 +47,7 @@ withCredentials([
         def DEPLOY_TIME = date.format("dd/MM/yyyy HH:mm")
         def jsonData = new JsonSlurper().parseText(siteConnection.getInputStream().getText())
 
-        def matcher = jsonData.body.storage.value =~ /<td><p><strong>PROD<\/strong><\/p><\/td><td><p>(.*?)<\/p><\/td><td><p>(.*?)<\/p><\/td><td><p>(.*?)<\/p><\/td><td><p>(.*?)<\/p><\/td>/
+        //def matcher = jsonData.body.storage.value =~ /<td><p><strong>PROD<\/strong><\/p><\/td><td><p>(.*?)<\/p><\/td><td><p>(.*?)<\/p><\/td><td><p>(.*?)<\/p><\/td><td><p>(.*?)<\/p><\/td>/
         
         ///<td><p><strong>${ENVIRONMET}<\/strong><\/p>(.*?)<\/td><td><p\/>(.*?)<\/td><td><p \/>(.*?)<\/td><td><p \/>(.*?)<\/td><td><p \/>(.*?)<\/td>/
         //  /<td colspan="1"><strong>${ENVIRONMET}<\/strong><\/td><td colspan="1">(.*?)<\/td><td colspan="1">(.*?)<\/td><td colspan="1">(.*?)<\/td><td colspan="1">(.*?)<\/td>/
@@ -59,8 +59,11 @@ withCredentials([
         if ( SOURCE_BRANCH.isEmpty() ) {
             SOURCE_BRANCH = matcher[0][2]
         }
+        jsonData.table.rows += [
+            ["new-cell-1", "new-cell-2", "new-cell-3", "new-cell-4", "new-cell-5"]
+        ]
         
-        jsonData.body.storage.value = jsonData.body.storage.value.replaceFirst("<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td>","<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>${STATUS}</p></td><td><p>${SOURCE_BRANCH}</p></td><td><p>${IMAGE_TAG}</p></td><td><p>${DEPLOY_TIME}</p></td>")
+        //jsonData.body.storage.value = jsonData.body.storage.value.replaceFirst("<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td>","<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>${STATUS}</p></td><td><p>${SOURCE_BRANCH}</p></td><td><p>${IMAGE_TAG}</p></td><td><p>${DEPLOY_TIME}</p></td>")
         
     //("<td colspan=\"1\"><strong>${ENVIRONMET}</strong><td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td>", "<td colspan=\"1\"><strong>${ENVIRONMET}</strong><td><td colspan=\"1\">${STATUS}</td><td colspan=\"1\">${SOURCE_BRANCH}</td><td colspan=\"1\">${IMAGE_TAG}</td><td colspan=\"1\">${DEPLOY_TIME}</td>" )
         jsonData.version.number += 1
