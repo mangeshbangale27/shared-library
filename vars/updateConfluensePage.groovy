@@ -1,4 +1,5 @@
 import groovy.json.JsonSlurper
+import groovy.xml.XmlSlurper
 import groovy.json.JsonBuilder
 import java.util.*
 import java.text.SimpleDateFormat
@@ -59,11 +60,15 @@ withCredentials([
         if ( SOURCE_BRANCH.isEmpty() ) {
             SOURCE_BRANCH = matcher[0][2]
         }
-        def jsonValue = new JsonSlurper().parseText(jsonData.body.storage.value)
-        jsonValue.table.rows += [
-            ["new-cell-1", "new-cell-2", "new-cell-3", "new-cell-4", "new-cell-5"]
-        ]
-        jsonData.body.storage.value = jsonValue.toString()
+        def table = new XmlSlurper().parseText(jsonData.body.storage.value)
+        table.appendNode {
+    tr {
+   td("new-cell-1")
+   td("new-cell-2")
+   td("new-cell-3")
+ }
+}
+     jsonData.body.storage.value = table.toString()
         //jsonData.body.storage.value = jsonData.body.storage.value.replaceFirst("<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td><td><p>(.*?)</p></td>","<td><p><strong>${ENVIRONMET}</strong></p></td><td><p>${STATUS}</p></td><td><p>${SOURCE_BRANCH}</p></td><td><p>${IMAGE_TAG}</p></td><td><p>${DEPLOY_TIME}</p></td>")
         
     //("<td colspan=\"1\"><strong>${ENVIRONMET}</strong><td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td><td colspan=\"1\">(.*?)</td>", "<td colspan=\"1\"><strong>${ENVIRONMET}</strong><td><td colspan=\"1\">${STATUS}</td><td colspan=\"1\">${SOURCE_BRANCH}</td><td colspan=\"1\">${IMAGE_TAG}</td><td colspan=\"1\">${DEPLOY_TIME}</td>" )
