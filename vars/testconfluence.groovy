@@ -8,9 +8,9 @@ def auth = 'Basic ' + "mangeshbangale27@gmail.com:excKBCr7rFgrerpnFIsC6888".byte
 http.request(Method.PUT, ContentType.JSON) { req ->
     headers.'Authorization' = auth
     body = [
-        id: pageId,
+        id: 1507329,
         type: 'page',
-        title: 'New Page Title',
+        title: 'demo',
         body: [
             storage: [
                 value: 'New page content',
