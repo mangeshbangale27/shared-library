@@ -1,76 +1,69 @@
-@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.7' )
-import groovyx.net.http.RESTClient
+import groovyx.net.http.HTTPBuilder
+import groovy.json.JsonSlurper
 
-// Set up the REST client
-def confluenceUrl = "https://mangeshbangale.atlassian.net"
-def client = new RESTClient(confluenceUrl)
-def username = "mangeshbangale27@gmail.com"
-def password = "excKBCr7rFgrerpnFIsC6888"
-// Set up the authentication
-def auth = "Basic " + "${username}:${password}".bytes.encodeBase64().toString()
+def confluenceURL = "https://mangeshbangale.atlassian.net"
+def accessToken = "excKBCr7rFgrerpnFIsC6888"
+def spaceKey = "MANGESH"
+def pageTitle = "demo"
 
-// Set up the JSON payload for the table
-def tableJson = """
-{
-    "type": "table",
-    "content": [
-        {
-            "type": "tableRow",
-            "content": [
-                {
-                    "type": "tableCell",
-                    "content": [
-                        {
-                            "type": "paragraph",
-                            "text": "Column 1"
-                        }
-                    ]
-                },
-                {
-                    "type": "tableCell",
-                    "content": [
-                        {
-                            "type": "paragraph",
-                            "text": "Column 2"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "tableRow",
-            "content": [
-                {
-                    "type": "tableCell",
-                    "content": [
-                        {
-                            "type": "paragraph",
-                            "text": "Row 1, Column 1"
-                        }
-                    ]
-                },
-                {
-                    "type": "tableCell",
-                    "content": [
-                        {
-                            "type": "paragraph",
-                            "text": "Row 1, Column 2"
-                        }
-                    ]
-                }
-            ]
-        }
+def http = new HTTPBuilder(confluenceURL)
+
+// Create table
+def createTableResponse = http.post(path: '/rest/api/content', headers: [
+    'Content-Type': 'application/json',
+    'Authorization': "Bearer ${accessToken}"
+], json: [
+    type: 'page',
+    title: pageTitle,
+    space: [
+        key: spaceKey
+    ],
+    body: [
+        storage: [
+            value: '<table><tbody><tr><th>Column 1</th><th>Column 2</th></tr></tbody></table>',
+            representation: 'storage'
+        ]
     ]
-}
-"""
+])
 
-// Send the POST request to create the table
-def pageId = "1507329" // replace with the ID of the page you want to add the table to
-def response = client.post(path: "/rest/api/content/${pageId}/child/table", headers: [Accept: "application/json", Authorization: auth], json: tableJson)
+// Get page ID
+def pageId = new JsonSlurper().parseText(createTableResponse.getData()).id
 
-// Check the response status code
-if (response.status != 201) {
-    println "Error creating table: ${response.status} ${response.statusLine}"
+// Add row to table
+def addRowResponse = http.put(path: "/rest/api/content/${pageId}/child/table", headers: [
+    'Content-Type': 'application/json',
+    'Authorization': "Bearer ${accessToken}"
+], json: [
+    table: [
+        rows: [
+            [
+                cells: [
+                    [
+                        contents: [
+                            [
+                                text: [
+                                    value: 'Row 1 Column 1'
+                                ]
+                            ]
+                        ]
+                    ],
+                    [
+                        contents: [
+                            [
+                                text: [
+                                    value: 'Row 1 Column 2'
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ]
+])
+
+if (addRowResponse.status == 200) {
+    println 'Row added successfully'
 } else {
-    println "Table created successfully!"
+    println 'Error adding row: ' + addRowResponse.status
 }
