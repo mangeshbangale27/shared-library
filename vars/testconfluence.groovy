@@ -9,62 +9,32 @@ def pageTitle = "demo"
 
 def http = new HTTPBuilder(confluenceURL)
 
-// Create table
-def createTableResponse = http.post(path: '/rest/api/content', headers: [
+// Get page ID
+def pageIdResponse = http.get(path: "/rest/api/content", headers: [
+    'Content-Type': 'application/json',
+    'Authorization': "Bearer ${accessToken}"
+], query: [
+    title: pageTitle,
+    spaceKey: spaceKey
+])
+def pageId = new JsonSlurper().parseText(pageIdResponse.getData()).results[0].id
+
+// Update page with new line
+def updateResponse = http.put(path: "/rest/api/content/${pageId}", headers: [
     'Content-Type': 'application/json',
     'Authorization': "Bearer ${accessToken}"
 ], json: [
-    type: 'page',
-    title: pageTitle,
-    space: [
-        key: spaceKey
-    ],
     body: [
         storage: [
-            value: '<table><tbody><tr><th>Column 1</th><th>Column 2</th></tr></tbody></table>',
+            value: '<p>Line 1</p>', // replace "Line 1" with the actual line you want to add
             representation: 'storage'
         ]
     ]
 ])
 
-// Get page ID
-def pageId = new JsonSlurper().parseText(createTableResponse.getData()).id
-
-// Add row to table
-def addRowResponse = http.put(path: "/rest/api/content/${pageId}/child/table", headers: [
-    'Content-Type': 'application/json',
-    'Authorization': "Bearer ${accessToken}"
-], json: [
-    table: [
-        rows: [
-            [
-                cells: [
-                    [
-                        contents: [
-                            [
-                                text: [
-                                    value: 'Row 1 Column 1'
-                                ]
-                            ]
-                        ]
-                    ],
-                    [
-                        contents: [
-                            [
-                                text: [
-                                    value: 'Row 1 Column 2'
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    ]
-])
-
-if (addRowResponse.status == 200) {
-    println 'Row added successfully'
+if (updateResponse.status == 200) {
+    println 'Line added successfully'
 } else {
-    println 'Error adding row: ' + addRowResponse.status
+    println 'Error adding line: ' + updateResponse.status
 }
+
