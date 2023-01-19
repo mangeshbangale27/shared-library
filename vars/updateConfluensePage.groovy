@@ -49,6 +49,7 @@ withCredentials([
         def jsonData = new JsonSlurper().parseText(siteConnection.getInputStream().getText())
         println(siteConnection)
         def matcher = jsonData.body.storage.value =~ /<td><p><strong>PROD<\/strong><\/p><\/td><td><p>(.*?)<\/p><\/td><td><p>(.*?)<\/p><\/td><td><p>(.*?)<\/p><\/td><td><p>(.*?)<\/p><\/td>/
+        println("printing matchers")
         println(matcher)
         ///<td><p><strong>${ENVIRONMET}<\/strong><\/p>(.*?)<\/td><td><p\/>(.*?)<\/td><td><p \/>(.*?)<\/td><td><p \/>(.*?)<\/td><td><p \/>(.*?)<\/td>/
         //  /<td colspan="1"><strong>${ENVIRONMET}<\/strong><\/td><td colspan="1">(.*?)<\/td><td colspan="1">(.*?)<\/td><td colspan="1">(.*?)<\/td><td colspan="1">(.*?)<\/td>/
